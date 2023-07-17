@@ -1,14 +1,14 @@
-<?php  require("../inc/header.php"); ?>
+<?php require("../inc/header.php"); ?>
 
 
 <body>
 
   <!-- ======= Header ======= -->
-  <?php  require("../inc/navbar.php"); ?>
-<!-- End Header -->
+  <?php require("../inc/navbar.php"); ?>
+  <!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
-  <?php  require("../inc/sidebar.php"); ?>
+  <?php require("../inc/sidebar.php"); ?>
 
   <!-- End Sidebar-->
 
@@ -29,35 +29,112 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Add User</h5>
+              <h5 class="card-title">Add Hero section data</h5>
+              <a name="" id="" class="btn btn-primary btn-sm mb-3" href="index.php" role="button">Manage users</a>
+
+              <?php
+              if (isset($_POST['save'])) {
+                $title = $_POST['title'];
+                $description = $_POST['description'];
+
+                $filename = $_FILES['dataFile']['name']; // take full file name
+                $filesize = $_FILES['dataFile']['size']; // take file size
+                $explode = explode(".", $filename); // array to string conversion
+                $fname = strtolower(@$explode[0]);  // convert  into lowercase
+                $ext = strtolower(@$explode[1]);  // convert  into lowercase
+                $file = str_replace(' ', '', $fname);
+                $finalname = $file . time() . '.' . $ext;
+
+                if ($title != "" && $finalname != "") {
+                  if ($filesize <= 300000) {
+                    if ($ext == 'jpg' || $ext == 'png' || $ext == 'jpeg') {
+                      if (move_uploaded_file($_FILES['dataFile']['tmp_name'], '../uploads/' . $finalname)) {
+                        $query = "INSERT INTO hero(title,description, img) VALUES('$title','$description', '$finalname')";
+                        $result = mysqli_query($con, $query);
+                        if ($result) {
+              ?>
+                          <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <strong>File is submitted, Congratulation!</strong>
+                          </div>
+
+                        <?php
+                           echo "<meta http-equiv=\"refresh\" content=\"1;URL=index.php\">";
+                        } else {
+                          header('Refresh:0');
+                        ?>
+                          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <strong>File is not submitted, Try Again!</strong>
+                          </div>
+
+                        <?php
+                        }
+                      } else {
+                        ?>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          <strong>File is not uploaded, try again!</strong>
+                        </div>
+
+                      <?php
+                      }
+                    } else {
+                      ?>
+                      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                        <strong>File extension does not match, try again!</strong>
+                      </div>
+
+                    <?php
+                    }
+                  } else {
+                    ?>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                      <strong>File size does not match, file size must be 2MB</strong>
+                    </div>
+
+                  <?php
+                  }
+                } else {
+                  ?>
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                    <strong>All fields are required</strong>
+                  </div>
+
+              <?php
+                  // header("Refresh:1");
+                }
+              }
+              ?>
 
               <!-- Multi Columns Form -->
-              <form class="row g-3">
+              <form class="row g-3" method="POST" enctype="multipart/form-data">
                 <div class="col-md-6">
-                  <label for="inputName5" class="form-label">Your Name</label>
-                  <input type="text" class="form-control" id="inputName5">
+                  <label for="inputName5" class="form-label">Title</label>
+                  <input type="text" class="form-control" id="inputName5" name="title">
                 </div>
                 <div class="col-md-6">
-                  <label for="inputEmail5" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="inputEmail5">
+                  <label for="inputName5" class="form-label">Image</label>
+                  <input type="file" class="form-control" id="inputName5" name="dataFile">
                 </div>
-                <div class="col-md-6">
-                  <label for="inputPassword5" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="inputPassword5">
+                <div class="col-md-12">
+                  <label for="inputEmail5" class="form-label">Description</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="3"></textarea>
                 </div>
-                <div class="col-md-6">
-                  <label for="inputAddress5" class="form-label">Address</label>
-                  <input type="text" class="form-control" id="inputAddres5s" placeholder="1234 Main St">
-                </div>
-                <div class="col-md-6">
-                  <label for="inputPhone" class="form-label">Phone</label>
-                  <input type="tel" class="form-control" id="inputPhone" placeholder="1234 Main St">
-                </div>
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="col-md-12">
+                  <button type="submit" name="save" class="btn btn-primary">Submit</button>
                   <button type="reset" class="btn btn-secondary">Reset</button>
                 </div>
-              </form><!-- End Multi Columns Form -->
+              </form>
+              <div>
+              </div>
+              <!-- End Multi Columns Form -->
 
             </div>
           </div>
@@ -68,4 +145,4 @@
 
   </main><!-- End #main -->
 
-  <?php  require("../inc/footer.php"); ?>
+  <?php require("../inc/footer.php"); ?>

@@ -1,3 +1,4 @@
+<?php require("connection/config.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,6 +44,7 @@
   <main>
     <div class="container">
 
+
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
           <div class="row justify-content-center">
@@ -58,54 +60,84 @@
               <div class="card mb-3">
 
                 <div class="card-body">
+                  <h5 class="card-title">Add User</h5>
+                  <?php
 
-                  <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
-                    <p class="text-center small">Enter your personal details to create account</p>
-                  </div>
+                  if (isset($_POST['save'])) {
+                    $name = $_POST['name'];
+                    $phone = $_POST['phone'];
+                    $address = $_POST['address'];
+                    $email = $_POST['email'];
+                    $password = md5($_POST['password']);
 
-                  <form class="row g-3 needs-validation" novalidate>
-                    <div class="col-12">
-                      <label for="yourName" class="form-label">Your Name</label>
-                      <input type="text" name="name" class="form-control" id="yourName" required>
-                      <div class="invalid-feedback">Please, enter your name!</div>
-                    </div>
+                    if ($name != "" && $phone != "" && $address != "" && $email != "" && $password != "") {
+                      $submit = "INSERT INTO users (name, phone, address, email, password) 
+                    VALUES ('$name','$phone','$address','$email', '$password')";
+                      $submit_result = mysqli_query($con, $submit);
+                      if ($submit_result) {
+                  ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                          <strong>Data are submitted</strong>
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
 
-                    <div class="col-12">
-                      <label for="yourEmail" class="form-label">Your Email</label>
-                      <input type="email" name="email" class="form-control" id="yourEmail" required>
-                      <div class="invalid-feedback">Please enter a valid Email adddress!</div>
-                    </div>
+                      <?php
+                        header("Refresh:2; url=index.php");
+                      } else {
+                      ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                          <strong>Data are not submitted</strong>
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
 
-                    <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please choose a username.</div>
+                      <?php
+                        header("Refresh:2; url=create.php");
+                      }
+                    } else {
+                      ?>
+                      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>All Fields are required</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                       </div>
-                    </div>
 
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Please enter your password!</div>
-                    </div>
+                  <?php
+                      header("Refresh:2; url=create.php");
+                    }
+                  }
 
-                    <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
-                        <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
-                        <div class="invalid-feedback">You must agree before submitting.</div>
-                      </div>
+                  ?>
+
+                  <!-- Multi Columns Form -->
+                  <form class="row g-3" method="POST" enctype="multipart/form-data">
+                    <div class="col-md-6">
+                      <label for="inputName5" class="form-label">Your Name</label>
+                      <input type="text" class="form-control" id="inputName5" name="name">
                     </div>
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                    <div class="col-md-6">
+                      <label for="inputEmail5" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="inputEmail5" name="email">
                     </div>
-                    <div class="col-12">
-                      <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
+                    <div class="col-md-6">
+                      <label for="inputPassword5" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="inputPassword5" name="password">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputAddress5" class="form-label">Address</label>
+                      <input type="text" class="form-control" id="inputAddres5s" name="address" placeholder="1234 Main St">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputPhone" class="form-label">Phone</label>
+                      <input type="tel" class="form-control" id="inputPhone" name="phone" placeholder="1234 Main St">
+                    </div>
+                    <div class="text-center">
+                      <button type="submit" name="save" class="btn btn-primary">Submit</button>
+                      <button type="reset" class="btn btn-secondary">Reset</button>
                     </div>
                   </form>
+                  <div>
+                    <a name="" id="" class="btn btn-primary" href="index.php" role="button">Login</a>
+                  </div>
+                  <!-- End Multi Columns Form -->
 
                 </div>
               </div>

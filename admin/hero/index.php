@@ -29,32 +29,40 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Manage Users</h5>
+              <a name="" id="" class="btn btn-primary" href="create.php" role="button">Create</a>
 
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Phone</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Img link</th>
+                    <th scope="col">Image</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Brandon Jacob</td>
-                    <td>Designer</td>
-                    <td>28</td>
-                    <td>2016-05-25</td>
-                    <td>
-                      <a name="" id="" class="btn btn-primary btn-sm" href="#" role="button">Edit</a>
-                      <a name="" id="" class="btn btn-info btn-sm" href="#" role="button">view</a>
-                      <a name="" id="" class="btn btn-danger btn-sm" href="#" role="button">delete</a>
-                    </td>
-                  </tr>
+                <?php
+                    $select= "SELECT *FROM hero";
+                    $result=mysqli_query($con, $select);
+                    $i=1;
+                    while($user=mysqli_fetch_array($result)){
+                        ?>
+                        <tr>
+                        <th scope="row"><?php echo $i++; ?></th>
+                        <td><?php echo $user['title']; ?></td>
+                        <td><?php echo $user['img']; ?></td>
+                        <td><img src="<?php echo '../uploads/'. $user['img']; ?>" alt="" width="100" height="100"></td>
+                        <td>
+                            <a name="" id="" class="btn btn-primary btn-sm " href="edit.php?id=<?php echo $user['id']; ?>" role="button">Edit</a>
+                            <a name="" id="" class="btn btn-info btn-sm" href="view.php?id=<?php echo $user['id']; ?>" role="button">View</a>
+                            <a name="" id="" class="btn btn-danger btn-sm" href="delete.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Do you want to delete data??')" role="button">Delete</a>
+                        </td>
+                    </tr>
+                    <?php
+                    }
+                    ?>
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
