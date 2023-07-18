@@ -1,43 +1,43 @@
 
 
-users
+1. users
 id | name | phone| address| email |  password | status | created_at | updated_at
 
-hero
+2. hero
  id | title | description | img | status | created_at | updated_at
 
- app_feature
+ 3. app_feature
  id | top_title | description | img | status | created_at | updated_at
 
- appfeatures
+ 4. appfeatures
  id | icon | title | description | status | created_at | updated_at
  
- abouts
+ 5. abouts
  id | img | title | description | status | created_at | updated_at
 
- services
+ 6. services
  id | title | status | created_at | updated_at
 
- galleries
+ 7. galleries
  id | img | status | created_at | updated_at
 
- Testimonials
+ 8. Testimonials
  id | img | name | post | message |  status | created_at | updated_at
 
- pricing 
+ 9. pricing 
  id | title | price | sub_title |  status | created_at | updated_at
 
- price_features
+ 10. price_features
  id | title |  status | created_at | updated_at
 
- faqs
+ 11. faqs
  id | qn | ans |  status | created_at | updated_at
 
- message
+ 12. message
  id | name | email | subject | message |  status | created_at | updated_at
 
-news_letters
+13. news_letters
 id | email |  status | created_at | updated_at
 
- settings
+ 14. settings
  id | site_key | site_value |  status | created_at | updated_at

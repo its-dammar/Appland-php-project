@@ -10,5 +10,5 @@ session_destroy();
 // unset($_SESSION['email']);
 // unset($_SESSION['name']);
 
-echo header("Location: ../index.php?msg=login_success");
+echo header("Location: ../../index.php?msg=login_success");
 ?>

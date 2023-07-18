@@ -45,6 +45,41 @@
           </li>
         </ul>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#appFeature" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>appFeature section</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="appFeature" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="../appfeature/create.php">
+              <i class="bi bi-circle"></i><span>Add appfeature section data</span>
+            </a>
+          </li>
+          <li>
+            <a href="../appfeature/index.php">
+              <i class="bi bi-circle"></i><span>Manage Hero section data</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#appFeatures" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>appFeatures section</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="appFeatures" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="../app_features/create.php">
+              <i class="bi bi-circle"></i><span>Add app_features section data</span>
+            </a>
+          </li>
+          <li>
+            <a href="../app_features/index.php">
+              <i class="bi bi-circle"></i><span>Manage Hero section data</span>
+            </a>
+          </li>
+        </ul>
+      </li>
     </ul>
 
   </aside><!-- End Sidebar-->

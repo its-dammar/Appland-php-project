@@ -59,7 +59,7 @@
 
               <div class="card mb-3">
 
-                <div class="card-body">
+                <div  class="card-body">
                   <h5 class="card-title">Add User</h5>
                   <?php
 
@@ -71,6 +71,21 @@
                     $password = md5($_POST['password']);
 
                     if ($name != "" && $phone != "" && $address != "" && $email != "" && $password != "") {
+
+                      $query = "SELECT * FROM users WHERE email='$email'";
+
+                      // Execute the query
+                      $result = mysqli_query($con, $query);
+
+                      // Check if the query returned any rows
+                      if (mysqli_num_rows($result) > 0) {
+                          // User with the same username already exists, display an error message
+                          echo "<p>Email already taken.</p>";
+                          header("Refresh:1");
+                      } 
+                      else{
+
+                    
                       $submit = "INSERT INTO users (name, phone, address, email, password) 
                     VALUES ('$name','$phone','$address','$email', '$password')";
                       $submit_result = mysqli_query($con, $submit);
@@ -91,8 +106,9 @@
                         </div>
 
                       <?php
-                        header("Refresh:2; url=create.php");
+                        // header("Refresh:2; url=create.php");
                       }
+                    }
                     } else {
                       ?>
                       <div class="alert alert-warning alert-dismissible fade show" role="alert">

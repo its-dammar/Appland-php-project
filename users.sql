@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `phone` varchar(15) NOT NULL,
   `address` varchar(50) NOT NULL,
   `email` varchar(150) NOT NULL,
-  `pasword` varchar(200) NOT NULL,
+  `password` varchar(200) NOT NULL,
   `status` int NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -49,6 +49,33 @@ CREATE TABLE IF NOT EXISTS `hero` (
   `title` varchar(150) NOT NULL,
   `description` varchar(15) NOT NULL,
   `img` varchar(50) NOT NULL,
+  `status` int NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+COMMIT;
+
+
+DROP TABLE IF EXISTS `app_feature`;
+CREATE TABLE IF NOT EXISTS `app_feature` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `top_title` varchar(150) NOT NULL,
+  `description` varchar(15) NOT NULL,
+  `img` varchar(50) NOT NULL,
+  `status` int NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+COMMIT;
+
+DROP TABLE IF EXISTS `appfeatures`;
+CREATE TABLE IF NOT EXISTS `appfeatures` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `icon` varchar(150) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `description` varchar(15) NOT NULL,
   `status` int NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
