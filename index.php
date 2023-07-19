@@ -179,11 +179,25 @@
     <!-- ======= Gallery Section ======= -->
     <section id="gallery" class="gallery">
       <div class="container" data-aos="fade-up">
+        <?php
 
+        $query = "SELECT *FROM settings";
+        $result = mysqli_query($con, $query);
+        // $data= $result->fetch_all();
+        while ($site = $result->fetch_assoc()) {
+          if ($site['site_key'] == "gallery-top_title") {
+            $gallery = $site['site_value'];
+          }
+          if ($site['site_key'] == "gallery-desc") {
+            $gallery_desc = $site['site_value'];
+          }
+
+          // yastai aru declare garne
+        }
+        ?>
         <div class="section-title">
-          <h2>Gallery</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
+          <h2><?php echo $gallery; ?></h2>
+        <p><?php echo  $gallery_desc; ?></p>
 
       </div>
 

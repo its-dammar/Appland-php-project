@@ -8,8 +8,7 @@
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
-      </li><!-- End Dashboard Nav -->
-
+      </li><!-- End Dashboard Nav --> 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Users</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -78,6 +77,23 @@
               <i class="bi bi-circle"></i><span>Manage Hero section data</span>
             </a>
           </li>
+          <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#setting" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Settings</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="setting" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="../settings/create.php">
+              <i class="bi bi-circle"></i><span>Add setting data</span>
+            </a>
+          </li>
+          <li>
+            <a href="../settings/index.php">
+              <i class="bi bi-circle"></i><span>Manage setting data</span>
+            </a>
+          </li>
+        </ul>
+      </li>
         </ul>
       </li>
     </ul>
